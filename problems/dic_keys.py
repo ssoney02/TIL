@@ -58,16 +58,12 @@ def is_validation(data):
     else:
         if ( data['blood_group'] not in blood_types):
             err_data.append('blood_group')
-            # result = (False, err_data)
         if ('@' not in data['mail']):
             err_data.append('mail')
-            # result = (False, err_data)
         if ( len(data['name']) > 30 or len(data['name']) < 2):
             err_data.append('name')
-            # result = (False, err_data)
         if ( len(data['website']) < 1 ):
             err_data.append('website')
-            # result = (False, err_data)
         
     
         if len(err_data) == 0:
