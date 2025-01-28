@@ -25,6 +25,9 @@ def create_user(data_lst):
                 # data[is_validation(data)[1][i]] = None
                 print(is_validation(data)[1][i])
                 user_list.append(data)
+                # print(user_list[-1][str(is_validation(data)[1][i])])
+                # 딕셔너리 값은 하나하나 잘 나옴..
+                
                 # 유저 리스트에 일단 해당 정보(딕셔너리)를 추가하고, 딕셔너리의['key'] = None
                 # n_key = str(is_validation(data)[1][i])
                 # 유저리스트에 마지막으로(방금) 추가한 것의 뽑아낸 key들의 value를 none으로 치환하고 싶음
