@@ -1,4 +1,4 @@
-#ws4_5
+
 def create_user(data_lst):
     user_list = []
     cnt = 0
@@ -16,26 +16,18 @@ def create_user(data_lst):
             user_list.append(data)
         elif is_validation(data) == 'blocked':
             cnt += 1
-            # break
-            # 검사를 종료하라고....?
+
         else:
-            #???ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ
+            # print(is_validation(data))
             for i in range(len(is_validation(data)[1])):
                 #is_validation(data)[1] -> ['name', 'company']
                 # data[is_validation(data)[1][i]] = None
-                print(is_validation(data)[1][i])
+                # print([is_validation(data)[1][i]])
                 user_list.append(data)
-                # print(user_list[-1][str(is_validation(data)[1][i])])
-                # 딕셔너리 값은 하나하나 잘 나옴..
-                
+
                 # 유저 리스트에 일단 해당 정보(딕셔너리)를 추가하고, 딕셔너리의['key'] = None
-                # n_key = str(is_validation(data)[1][i])
                 # 유저리스트에 마지막으로(방금) 추가한 것의 뽑아낸 key들의 value를 none으로 치환하고 싶음
-                user_list[-1][is_validation(data)[1][i]] = None
-            # 이때는,, 튜플 형태로 반환.......?
-            # 튜플 인덱스[1] 가져와서, 튜플[1][i]
-            # for i in range(len(result[1][i])):
-            #     result[1][i] = None
+                user_list[-1][str(is_validation(data)[1][i])] = None
             cnt += 1
     
     print(f'잘못된 데이터로 구성된 유저의 수는 {cnt} 입니다.')
@@ -55,18 +47,35 @@ def is_validation(data):
     # => False 반환 & return [keys] 단, 2번 위반의 경우, return 'blocked'&break
     err_data = []
     # (data['compnay'] in black_list) or
-
-    if ( data['blood_group'] not in blood_types) or ('@' not in data['mail']) or( len(data['name']) > 30 or len(data['name']) < 2) or ( len(data['website']) < 1 ) :
-        for key in data.keys():
-            # key만 빼와야됨
-            err_data.append(key)
-            result = (False, err_data)
-        return result
     
-    elif data['company'] in black_list:
+    # for key in data.keys():
+        # 딕셔너리 하나를 순회하는 것
+    if data['company'] in black_list:
         return 'blocked'
+            # break
 
+            
     else:
-        return True
+        if ( data['blood_group'] not in blood_types):
+            err_data.append('blood_group')
+            # result = (False, err_data)
+        if ('@' not in data['mail']):
+            err_data.append('mail')
+            # result = (False, err_data)
+        if ( len(data['name']) > 30 or len(data['name']) < 2):
+            err_data.append('name')
+            # result = (False, err_data)
+        if ( len(data['website']) < 1 ):
+            err_data.append('website')
+            # result = (False, err_data)
+        
+    
+        if len(err_data) == 0:
+            return True
+        elif len(err_data) > 0:
+            return (False, err_data)
+    
+    
+
     
 create_user(user_data)
