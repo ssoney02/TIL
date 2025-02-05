@@ -1,28 +1,30 @@
+# max 안쓴코드
 T = int(input())
 
 for test_case in range(1, T+1):
     n = int(input())
     boxes = list(map(int, input().split()))
-    results = []
-    if n == 1:
-        num = 0
+    result = []
     for i in range(n):
-        # i 보다 오른쪽의 인덱스 중, 자기보다 작은 수만큼 떨어짐짐
-        right_boxes = list(boxes[i+1:])
-        # print(f'rightbox:{right_boxes}')
+        # boxes[n]이 되는 경우 고려! (제일 오른쪽 부분)
         if i == (n-1):
-            results.append(0)
-        else:
             cnt = 0
-            for j in len(right_boxes):
-                if boxes[i] > right_boxes[j]:
-                    cnt += 1
-                results.append(cnt)
-        
-    num = max(results)
-    # print(num)
-    # print(results)
-    
-    
-    print(f'#{test_case} {num}')
-        
+        else:
+            right_num = boxes[i+1:]
+            cnt = 0
+            # print(f'r:{right_num}')
+            for j in right_num:
+                if boxes[i] > j:
+                    cnt += 1 # boxes[i]보다 작은 것 개수 셈. cnt = 낙차
+        result.append(cnt)
+        answer = 0
+        for r in result:
+            if r > answer:
+                answer = r
+            
+    # print(result)
+    print(f'#{test_case} {answer}')
+
+    '''
+    max 사용 -> max(result)바로 출력
+    '''
