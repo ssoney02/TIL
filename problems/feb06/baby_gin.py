@@ -2,23 +2,37 @@
 T = int(input())
 
 for test_case in range(1, T + 1):
-    num_list = list(map(int, input()))
-    sorted_list = sorted(num_list)
+     num = int(input())
 
-    num_1 = sorted_list[:3]
-    num_2 = sorted_list[3:]
-    
-    # print(num_1)
-    # print(type(num_1))
-    for i in range(2):
-        if ((num_1[i] + 1) == num_1[i+1] and (num_2[i] +1) == num_2[i+1]) or ((num_1[i] + 1) == num_1[i+1] and len(set(num_2))== 1) or (len(set(num_1))== 1 and (num_2[i] +1) == num_2[i+1]) or (len(set(num_1)) == 1 and len(set(num_2)) == 1):
-             result = 'true'
-        
-        else:
-             result = 'false'
+# for i in range(len(num_list)):
+#      if num_list[i] == num_list[i+1]
 
-    # if len(set(num_1)) == 1 and len(set(num_2)) == 1:
-    #         result = 'true'
-        
+     c = [0] * 12
 
-    print(f'#{test_case} {result}')
+     for _ in range(6):
+          c[num%10] += 1
+          num //= 10
+          print(c) # 각 숫자의 개수를 담은 리스트 생성
+
+     i = 0
+     tri = run = 0
+     while i < 10:
+          if c[i] >= 3:
+               c[i] -= 3
+               tri += 1
+               continue
+          if c[i] >= 1 and c[i+1] >= 1 and c[i+2] >= 1:
+               c[i] -= 1
+               c[i+1] -=1
+               c[i+2] -=1
+               run += 1
+               continue
+          i += 1
+
+     if run + tri == 2:
+          print(f'#{test_case} true')
+     else:
+          print(f'#{test_case} false')
+
+
+
